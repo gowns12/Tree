@@ -23,7 +23,10 @@ public class TreeController {
     @DeleteMapping("/trees/{treeId}")
     public void delete(@PathVariable Long treeId){
         treeService.delete(treeId);
-
+    }
+    @PatchMapping("/trees/{treeId}/isClose")
+    public void close(@PathVariable Long treeId){
+        treeService.close(treeId);
     }
 
 }

@@ -23,10 +23,13 @@ public class Tree extends BaseTimeEntity {
     @OneToMany(mappedBy = "tree")
     private List<Letter> letterList;
 
+    private boolean isOpen;
 
-    public Tree(User user, String title) {
-        this.user = user;
+
+    public Tree(String title, User user) {
         this.title = title;
+        this.user = user;
+        this.isOpen = true;
     }
 
     public Tree(String title) {
@@ -50,5 +53,8 @@ public class Tree extends BaseTimeEntity {
 
     public List<Letter> getLetterList() {
         return letterList;
+    }
+    public void isClose(){
+        this.isOpen=false;
     }
 }

@@ -13,9 +13,7 @@ public class TreeService {
 
     public TreeService(TreeRepository treeRepository, UserRepository userRepository) {
         this.treeRepository = treeRepository;
-
     }
-
     public void create(createTreeRequest request) {
         treeRepository.save(new Tree(request.title()));
     }
@@ -27,5 +25,10 @@ public class TreeService {
     @Transactional
     public void delete(Long treeId) {
         treeRepository.deleteById(treeId);
+    }
+    @Transactional
+    public void close(Long treeId) {
+        Tree tree = treeRepository.findById(treeId).orElseThrow(() -> new NoSuchElementException("id가 없습니다."));
+        tree.isClose();
     }
 }
