@@ -21,10 +21,10 @@ public class LetterController {
         letterService.create(rq);
     }
 
-    @GetMapping("/{tree_id}")
-    public List<LetterResponse> readAll(@PathVariable(name = "tree_id") Long treeId){
-        return letterService.readAll(treeId);
-    }
+//    @GetMapping("/{tree_id}")
+//    public List<LetterResponse> readAll(@PathVariable(name = "tree_id") Long treeId){
+//        return letterService.readAll(treeId);
+//    }
 
     @GetMapping("/{letter_id}")
     public LetterResponse read(@PathVariable(name = "letter_id") Long letterId){

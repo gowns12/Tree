@@ -27,10 +27,7 @@ public class LetterService {
 
     public List<LetterResponse> readAll(Long treeId) {
         return letterRepository.findAllByTreeId(treeId).stream()
-                .map(o->new LetterResponse(
-                        o.getContent(),
-                        o.getNickname(),
-                        o.getCreatedTime()))
+                .map(LetterResponse::toDto)
                 .toList();
     }
 
