@@ -126,4 +126,12 @@ public class Letter extends BaseTimeEntity {
     public void addRecommend(Recommend recommend) {
         recommends.add(recommend);
     }
+
+    public List<Recommend> getRecommends() {
+        return recommends;
+    }
+
+    public void recover() {
+        isDeleted = false;
+    }
 }

@@ -51,4 +51,9 @@ public class LetterController {
     public void pushRecommend(@PathVariable(name = "letter_id") Long letterId, Long userId) {
         letterService.pushRecommend(letterId, userId);
     }
+
+    @PatchMapping("/{letter_id}")
+    public void recoveryLetter(@PathVariable(name = "letter_id") Long letterId, Long userId){
+        letterService.recoveryLetter(letterId, userId);
+    }
 }

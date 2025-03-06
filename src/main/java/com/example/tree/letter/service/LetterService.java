@@ -65,10 +65,10 @@ public class LetterService {
         Letter letter = FindEntity.findByLetterId(letterId, letterRepository);
         User user = FindEntity.findByUserId(userId, userRepository);
         Tree tree = letter.getTree();
-        if (!letter.getUser().equals(user) || tree.getUser().equals(user)) {
-            throw new AccessDeniedException("삭제 권한이 없습니다.");
-        } else {
+        if (letter.getUser().equals(user) || tree.getUser().equals(user)) {
             letter.delete();
+        } else {
+            throw new AccessDeniedException("삭제 권한이 없습니다.");
         }
     }
 
@@ -78,7 +78,7 @@ public class LetterService {
     public void changeIsInvisible(Long letterId, Long userId) {
         Letter letter = FindEntity.findByLetterId(letterId, letterRepository);
         if (!letter.getUser().getId().equals(userId)) {
-            throw new AccessDeniedException("삭제 권한이 없습니다.");
+            throw new AccessDeniedException("변경 권한이 없습니다.");
         } else {
             letter.changeIsVisible();
         }
@@ -97,6 +97,20 @@ public class LetterService {
         Recommend recommend = new Recommend(letter, user);
         letter.addRecommend(recommend);
         recommendRepository.save(recommend);
+    }
+
+    //삭제된 편지 복구
+    //관리자나 작성자만 복구 가능
+    public void recoveryLetter(Long letterId, Long userId) {
+        Letter letter = FindEntity.findByLetterId(letterId, letterRepository);
+        User user = FindEntity.findByUserId(userId, userRepository);
+        Tree tree = letter.getTree();
+        if (tree.getUser().equals(user) || letter.getUser().equals(user)){
+            letter.recover();
+        }
+        else {
+            throw new AccessDeniedException("복구 권한이 없습니다.");
+        }
     }
 
     //리포지토리로 엔티티를 조회하는 클래스
