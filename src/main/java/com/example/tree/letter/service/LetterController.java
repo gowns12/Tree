@@ -16,23 +16,44 @@ public class LetterController {
         this.letterService = letterService;
     }
 
+    //편지 작성
     @PostMapping
-    public void LetterCreate(@RequestBody@Valid LetterRequest rq){
-        letterService.create(rq);
+    public void create(@RequestBody @Valid LetterRequest rq, Long userId) {
+        letterService.create(rq, userId);
     }
 
+    //편지 조회
     @GetMapping("/{letter_id}")
-    public LetterResponse read(@PathVariable(name = "letter_id") Long letterId){
-        return letterService.read(letterId);
+    public LetterResponse read(@PathVariable(name = "letter_id") Long letterId, Long userId) {
+        return letterService.read(letterId, userId);
     }
 
+    //편지 수정
     @PutMapping("/{letter_id}")
-    public void update(@RequestBody@Valid LetterRequest rq, @PathVariable(name = "letter_id") Long letterId){
-        letterService.update(rq, letterId);
+    public void update(@RequestBody @Valid LetterRequest rq, @PathVariable(name = "letter_id") Long letterId, Long userId) {
+        letterService.update(rq, letterId, userId);
     }
 
+    //편지 삭제
     @DeleteMapping("/{letter_id}")
-    public void delete(@PathVariable(name = "letter_id") Long letterId){
-        letterService.delete(letterId);
+    public void delete(@PathVariable(name = "letter_id") Long letterId, Long userId) {
+        letterService.delete(letterId, userId);
+    }
+
+    //편지 공개 상태 변경
+    @PatchMapping("/{letter_id}")
+    public void changeIsInvisible(@PathVariable(name = "letter_id") Long letterId, Long userId) {
+        letterService.changeIsInvisible(letterId, userId);
+    }
+
+    //추천 버튼 클릭
+    @PatchMapping("/{letter_id}")
+    public void pushRecommend(@PathVariable(name = "letter_id") Long letterId, Long userId) {
+        letterService.pushRecommend(letterId, userId);
+    }
+
+    @PatchMapping("/{letter_id}")
+    public void recoveryLetter(@PathVariable(name = "letter_id") Long letterId, Long userId){
+        letterService.recoveryLetter(letterId, userId);
     }
 }
