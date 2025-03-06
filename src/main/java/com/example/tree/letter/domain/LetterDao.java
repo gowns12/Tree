@@ -36,14 +36,21 @@ public class LetterDao {
                 .where(qLetter.id.eq(letterId))
                 .fetchOne();
 
-
-
         Letter letter = queryFactory
                 .selectFrom(qLetter)
-                .where(qLetter.id.eq(letterId).and(qLetter.isInvisible))
+                .where(qLetter.id.eq(letterId))
                 .fetchOne();
-        if(letter == null){
-            throw new AccessDeniedException("트리주인과 작성자만 볼 수 있는 편지입니다.");
+
+        if (tree.getUser().equals(user)||letter.getUser().equals(user)){
+            return queryFactory
+                    .selectFrom(qLetter)
+                    .where(qLetter.id.eq(letterId))
+                    .fetchOne();
         }
+
+        if (letter.getInvisible()){
+            return letter;
+        }
+        throw new AccessDeniedException("트리주인과 작성자만 볼 수 있는 편지입니다.");
     }
 }
