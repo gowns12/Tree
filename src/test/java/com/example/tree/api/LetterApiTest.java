@@ -57,6 +57,13 @@ public class LetterApiTest extends AcceptanceTest {
     @Test
     void deleteLetterTest() {
         RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .body(new LetterRequest("test-content","test-nickname",1L))
+                .when().post("/api/letters")
+                .then();
+
+        RestAssured
                 .given().log().all()
                 .pathParam("letter_id","1")
                 .when().delete("/api/letters/{letter_id}")
