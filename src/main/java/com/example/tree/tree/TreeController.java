@@ -12,6 +12,9 @@ public class TreeController {
         this.treeService = treeService;
     }
 
-
+    @PostMapping("/trees")
+    public void create(@RequestBody createTreeRequest request){
+        treeService.create(request);
+    }
 
 }

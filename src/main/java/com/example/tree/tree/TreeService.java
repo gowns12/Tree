@@ -10,5 +10,7 @@ public class TreeService {
         this.treeRepository = treeRepository;
     }
 
-
+    public void create(createTreeRequest request) {
+        treeRepository.save(new Tree(request.title()));
+    }
 }
