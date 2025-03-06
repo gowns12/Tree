@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class Tree extends BaseTimeEntity {
@@ -16,6 +17,8 @@ public class Tree extends BaseTimeEntity {
     private Long id;
 
     private String title;
+
+    private String urlPath;
 
     @ManyToOne
     private User user;
@@ -30,6 +33,7 @@ public class Tree extends BaseTimeEntity {
         this.title = title;
         this.user = user;
         this.isOpen = true;
+        this.urlPath= UUID.randomUUID().toString();
     }
 
     public Tree(String title) {
@@ -47,6 +51,14 @@ public class Tree extends BaseTimeEntity {
         return title;
     }
 
+    public String getUrlPath() {
+        return urlPath;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
     public User getUser() {
         return user;
     }
@@ -54,6 +66,7 @@ public class Tree extends BaseTimeEntity {
     public List<Letter> getLetterList() {
         return letterList;
     }
+
     public void isClose(){
         this.isOpen=false;
     }

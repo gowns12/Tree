@@ -10,17 +10,20 @@ import java.util.NoSuchElementException;
 @Service
 public class TreeService {
     private final TreeRepository treeRepository;
+    private final UserRepository userRepository;
 
-    public TreeService(TreeRepository treeRepository, UserRepository userRepository) {
+    public TreeService(TreeRepository treeRepository, UserRepository userRepository, UserRepository userRepository1) {
         this.treeRepository = treeRepository;
+        this.userRepository = userRepository1;
     }
     public void create(createTreeRequest request) {
-        treeRepository.save(new Tree(request.title()));
+        User user = userRepository.findById(request.userId()).orElseThrow(() -> new NoSuchElementException("userId가 없습니다."));
+        treeRepository.save(new Tree(request.title(),user));
     }
 
     public TreeResponse read(Long treeId) {
         Tree tree = treeRepository.findById(treeId).orElseThrow(() -> new NoSuchElementException("id가 없습니다."));
-        return new TreeResponse(tree.getId(),tree.getTitle(),tree.getUser().getId(),tree.getLetterList());
+        return new TreeResponse(tree.getId(),tree.getTitle(),tree.getUrlPath(),tree.isOpen(),tree.getUser().getId(),tree.getLetterList());
     }
     @Transactional
     public void delete(Long treeId) {
