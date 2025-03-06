@@ -9,14 +9,16 @@ import java.util.Objects;
 
 @Embeddable
 public class RecommendId implements Serializable {
-    @ManyToOne
-    private Letter letter;
-    @ManyToOne
-    private User user;
+    private Long userId;
 
-    public RecommendId(Letter letter, User user) {
-        this.letter = letter;
-        this.user = user;
+    private Long letterId;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public Long getLetterId() {
+        return letterId;
     }
 
     public RecommendId() {
@@ -27,19 +29,19 @@ public class RecommendId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RecommendId that = (RecommendId) o;
-        return Objects.equals(letter, that.letter) && Objects.equals(user, that.user);
+        return Objects.equals(userId, that.userId) && Objects.equals(letterId, that.letterId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(letter, user);
+        return Objects.hash(userId, letterId);
     }
 
     @Override
     public String toString() {
         return "RecommendId{" +
-                "letter=" + letter +
-                ", user=" + user +
+                "userId=" + userId +
+                ", letterId=" + letterId +
                 '}';
     }
 }

@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -30,6 +32,8 @@ public class Letter extends BaseTimeEntity {
 
     private Boolean isInvisible = true;
 
+    @OneToMany(mappedBy = "letter" ,orphanRemoval = true)
+    private List<Recommend> recommends = new ArrayList<>();
 
     public User getUser() {
         return user;
@@ -46,7 +50,7 @@ public class Letter extends BaseTimeEntity {
         this.content = content;
         this.nickname = nickName;
         this.tree = tree;
-//        tree.getLetter().add(this);
+        tree.getLetterList().add(this);
         this.user = user;
 //        user.getLetters().add(this);
     }
@@ -103,5 +107,21 @@ public class Letter extends BaseTimeEntity {
 
     public void delete() {
         isDeleted = true;
+    }
+
+    public void changeIsVisible() {
+        isInvisible = !isInvisible;
+    }
+
+    public void pushRecommend() {
+
+    }
+
+    public void removeRecommend(Recommend recommend) {
+        recommends.remove(recommend);
+    }
+
+    public void addRecommend(Recommend recommend) {
+        recommends.add(recommend);
     }
 }

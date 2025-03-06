@@ -1,7 +1,10 @@
 package com.example.tree.letter.domain;
 
+import com.example.tree.User.User;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 
 import java.util.Objects;
 
@@ -9,6 +12,12 @@ import java.util.Objects;
 public class Recommend {
     @EmbeddedId
     private RecommendId id;
+    @ManyToOne
+    @MapsId("letterId")
+    private Letter letter;
+    @ManyToOne
+    @MapsId("userId")
+    private User user;
 
     public Recommend() {
     }
@@ -17,7 +26,10 @@ public class Recommend {
         return id;
     }
 
-
+    public Recommend(Letter letter, User user) {
+        this.letter = letter;
+        this.user = user;
+    }
 
     @Override
     public boolean equals(Object o) {

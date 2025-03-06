@@ -35,4 +35,14 @@ public class LetterController {
     public void delete(@PathVariable(name = "letter_id") Long letterId){
         letterService.delete(letterId);
     }
+
+    @PatchMapping("/{letter_id}")
+    public void changeIsInvisible(@PathVariable(name = "letter_id") Long letterId){
+        letterService.changeIsInvisible(letterId);
+    }
+
+    @PatchMapping("/{letter_id}")
+    public void pushRecommend(@PathVariable(name = "letter_id") Long letterId, Long userId){
+        letterService.pushRecommend(letterId, userId);
+    }
 }
