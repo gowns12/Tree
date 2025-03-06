@@ -1,8 +1,6 @@
 package com.example.tree.tree;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TreeController {
@@ -15,6 +13,17 @@ public class TreeController {
     @PostMapping("/trees")
     public void create(@RequestBody createTreeRequest request){
         treeService.create(request);
+    }
+
+    @GetMapping("/trees/{treeId}")
+    public TreeResponse read(@PathVariable Long treeId){
+        return treeService.read(treeId);
+    }
+
+    @DeleteMapping("/trees/{treeId}")
+    public void delete(@PathVariable Long treeId){
+        treeService.delete(treeId);
+
     }
 
 }
