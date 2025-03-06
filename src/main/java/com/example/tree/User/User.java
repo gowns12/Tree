@@ -11,10 +11,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank(message = "Id를 입력해주세요.")
     private String userId;
+
     @NotBlank(message = "Password  입력해주세요.")
     private String password;
+
     @NotBlank(message = "닉네임을 입력해주세요.")
     private String nickname;
 
@@ -32,15 +35,16 @@ public class User {
         return id;
     }
 
-    public @NotBlank(message = "Id를 입력해주세요.") String getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public @NotBlank(message = "Password  입력해주세요.") String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public @NotBlank(message = "닉네임을 입력해주세요.") String getNickname() {
+    public String getNickname() {
         return nickname;
     }
+
 }
