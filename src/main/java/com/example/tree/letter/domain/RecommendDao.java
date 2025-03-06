@@ -17,7 +17,7 @@ public class RecommendDao {
     public Boolean existsRecommend(Letter letter, User user){
         Recommend recommend = queryFactory
                 .selectFrom(qRecommend)
-                .where(qRecommend.id.letter.eq(letter).and(qRecommend.id.user.eq(user)))
+                .where(qRecommend.id.letterId.eq(letter.getId()).and(qRecommend.id.userId.eq(user.getId())))
                 .fetchFirst();
         return recommend != null;
     }
@@ -25,7 +25,7 @@ public class RecommendDao {
     public Recommend findByLetterAndUser(Letter letter, User user) {
         return queryFactory
                 .selectFrom(qRecommend)
-                .where(qRecommend.id.letter.eq(letter).and(qRecommend.id.user.eq(user)))
+                .where(qRecommend.id.letterId.eq(letter.getId()).and(qRecommend.id.userId.eq(user.getId())))
                 .fetchOne();
     }
 }
