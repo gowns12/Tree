@@ -1,20 +1,46 @@
 package com.example.tree.User;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
+@Table(name = "users") //테이블 이름이 곂쳐서 새 테이블 이름 지정해줌
 public class User {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
     @NotBlank(message = "Id를 입력해주세요.")
-    String userId;
+    private String userId;
     @NotBlank(message = "Password  입력해주세요.")
-    String password;
+    private String password;
     @NotBlank(message = "닉네임을 입력해주세요.")
-    String nickname;
+    private String nickname;
+
+    public User() {
+    }
+
+    public User(String userId, String password, String nickname) {
+
+        this.userId = userId;
+        this.password = password;
+        this.nickname = nickname;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public @NotBlank(message = "Id를 입력해주세요.") String getUserId() {
+        return userId;
+    }
+
+    public @NotBlank(message = "Password  입력해주세요.") String getPassword() {
+        return password;
+    }
+
+    public @NotBlank(message = "닉네임을 입력해주세요.") String getNickname() {
+        return nickname;
+    }
 }
