@@ -6,11 +6,9 @@ import com.example.tree.letter.dto.LetterResponse;
 import com.example.tree.tree.createTreeRequest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 
 public class LetterApiTest extends AcceptanceTest {
 
@@ -19,9 +17,17 @@ public class LetterApiTest extends AcceptanceTest {
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)
-                .body(new createTreeRequest("test"))
+                .body(new createTreeRequest("test",1L))
                 .when().post("/trees")
                 .then();
+
+        RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .body(new createTreeRequest("test",1L))
+                .when().post("/users/signup")
+                .then();
+
     }
 
     @Test

@@ -17,9 +17,11 @@ public class Letter extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //편지내용
     @NotNull
     private String content;
 
+    //닉네임
     private String nickname;
 
     @ManyToOne

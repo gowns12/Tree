@@ -10,6 +10,8 @@ import java.util.Objects;
 
 @Entity
 public class Recommend {
+    //복합키를 이용해 추천 중복방지
+    //복합키는 Letter와 User를 키로 가짐
     @EmbeddedId
     private RecommendId id;
     @ManyToOne

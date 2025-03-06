@@ -7,10 +7,11 @@ import jakarta.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
+//Recommend 의 복합키
 @Embeddable
 public class RecommendId implements Serializable {
-    private Long userId;
 
+    private Long userId;
     private Long letterId;
 
     public Long getUserId() {

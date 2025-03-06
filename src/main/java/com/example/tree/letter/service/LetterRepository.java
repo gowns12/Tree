@@ -7,5 +7,4 @@ import java.util.Arrays;
 import java.util.List;
 
 public interface LetterRepository extends JpaRepository<Letter,Long> {
-    List<Letter> findAllByTree_Id(Long treeId);
 }

@@ -9,8 +9,7 @@ public record LetterRequest(
         @Size(max = 300,min = 1)
         String content,
         String nickname,
-        Long treeId,
-        Long userId
+        Long treeId
 ) {
         public Letter toEntity(Tree tree, User user){
                 return new Letter(
