@@ -40,8 +40,15 @@ public class LetterService {
     }
 
     @Transactional
-    public void update(@Valid LetterRequest rq) {
+    public void update(@Valid LetterRequest rq,Long letterId) {
+        Letter letter = findEntity.findByLetterId(letterId);
+        letter.update(rq.content(),rq.nickname());
+    }
 
+    @Transactional
+    public void delete(Long letterId) {
+        Letter letter = findEntity.findByLetterId(letterId);
+        letter.delete();
     }
 
     public class FindEntity {

@@ -32,7 +32,12 @@ public class LetterController {
     }
 
     @PutMapping("/{letter_id}")
-    public void update(@RequestBody@Valid LetterRequest rq){
-        letterService.update(rq);
+    public void update(@RequestBody@Valid LetterRequest rq, @PathVariable(name = "letter_id") Long letterId){
+        letterService.update(rq, letterId);
+    }
+
+    @DeleteMapping("/{letter_id}")
+    public void delete(@PathVariable(name = "letter_id") Long letterId){
+        letterService.delete(letterId);
     }
 }

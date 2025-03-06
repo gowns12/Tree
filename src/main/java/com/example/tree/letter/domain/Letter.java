@@ -2,6 +2,7 @@ package com.example.tree.letter.domain;
 
 import com.example.tree.BaseTimeEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
@@ -72,9 +73,18 @@ public class Letter extends BaseTimeEntity {
         return "Letter{" +
                 "id=" + id +
                 ", content='" + content + '\'' +
-                ", nickName='" + nickName + '\'' +
+                ", nickName='" + nickname + '\'' +
                 ", isDeleted=" + isDeleted +
                 ", isInvisible=" + isInvisible +
                 '}';
+    }
+
+    public void update(@Size(max = 300,min = 1) String content, String nickname) {
+        this.content = content;
+        this.nickname = nickname;
+    }
+
+    public void delete() {
+        isDeleted = true;
     }
 }
