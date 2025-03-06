@@ -1,14 +1,15 @@
-package com.example.tree.letter.domain;
-
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.ManyToOne;
-
-import java.io.Serializable;
-
-@Embeddable
-public class RecommendId implements Serializable {
-    @ManyToOne
-    private Letter letter;
+//package com.example.tree.letter.domain;
+//
+//import jakarta.persistence.Embeddable;
+//import jakarta.persistence.ManyToOne;
+//
+//import java.io.Serializable;
+//import java.util.Objects;
+//
+//@Embeddable
+//public class RecommendId implements Serializable {
+//    @ManyToOne
+//    private Letter letter;
 //    @ManyToOne
 //    private User user;
 //
@@ -40,4 +41,4 @@ public class RecommendId implements Serializable {
 //                ", user=" + user +
 //                '}';
 //    }
-}
+//}

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/letter")
+@RequestMapping("/api/letters")
 public class LetterController {
     private final LetterService letterService;
 
@@ -20,11 +20,6 @@ public class LetterController {
     public void LetterCreate(@RequestBody@Valid LetterRequest rq){
         letterService.create(rq);
     }
-
-//    @GetMapping("/{tree_id}")
-//    public List<LetterResponse> readAll(@PathVariable(name = "tree_id") Long treeId){
-//        return letterService.readAll(treeId);
-//    }
 
     @GetMapping("/{letter_id}")
     public LetterResponse read(@PathVariable(name = "letter_id") Long letterId){

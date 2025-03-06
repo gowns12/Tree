@@ -1,7 +1,9 @@
 package com.example.tree.letter.domain;
 
 import com.example.tree.BaseTimeEntity;
+import com.example.tree.tree.Tree;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
@@ -12,6 +14,7 @@ public class Letter extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String content;
 
     private String nickname;
@@ -19,8 +22,8 @@ public class Letter extends BaseTimeEntity {
 //    @ManyToOne
 //    private User user;
 
-//    @ManyToOne
-//    private Tree tree;
+    @ManyToOne
+    private Tree tree;
 
     private Boolean isDeleted = false;
 
@@ -29,9 +32,11 @@ public class Letter extends BaseTimeEntity {
     public Letter() {
     }
 
-    public Letter(String content, String nickName) {
+    public Letter(String content, String nickName, Tree tree) {
         this.content = content;
         this.nickname = nickName;
+        this.tree = tree;
+//        tree.getLetter().add(this);
     }
 
     public Long getId() {
