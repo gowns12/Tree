@@ -1,6 +1,7 @@
 package com.example.tree.letter.domain;
 
 import com.example.tree.BaseTimeEntity;
+import com.example.tree.User.User;
 import com.example.tree.tree.Tree;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -19,24 +20,35 @@ public class Letter extends BaseTimeEntity {
 
     private String nickname;
 
-//    @ManyToOne
-//    private User user;
+    @ManyToOne
+    private User user;
 
     @ManyToOne
     private Tree tree;
 
     private Boolean isDeleted = false;
 
-    private Boolean isInvisible = false;
+    private Boolean isInvisible = true;
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public Tree getTree() {
+        return tree;
+    }
 
     public Letter() {
     }
 
-    public Letter(String content, String nickName, Tree tree) {
+    public Letter(String content, String nickName, Tree tree, User user) {
         this.content = content;
         this.nickname = nickName;
         this.tree = tree;
 //        tree.getLetter().add(this);
+        this.user = user;
+//        user.getLetters().add(this);
     }
 
     public Long getId() {
