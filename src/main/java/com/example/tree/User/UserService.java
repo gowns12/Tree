@@ -56,6 +56,8 @@ public class UserService {
     @Transactional
     public void update(User user, UserUpdate request) {
         user.updateWith(
+                request.loginId(),
+                request.password(),
                 request.nickName()
         );
     }

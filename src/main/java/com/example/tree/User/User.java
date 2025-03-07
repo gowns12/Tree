@@ -13,7 +13,7 @@ public class User {
     private Long id;
 
     @NotBlank(message = "Id를 입력해주세요.")
-    private String userId;
+    private String loginId;
 
     @NotBlank(message = "Password  입력해주세요.")
     private String password;
@@ -26,7 +26,7 @@ public class User {
 
     public User(String userId, String password, String nickname) {
 
-        this.userId = userId;
+        this.loginId = userId;
         this.password = password;
         this.nickName = nickname;
     }
@@ -36,7 +36,7 @@ public class User {
     }
 
     public String getUserId() {
-        return userId;
+        return loginId;
     }
 
     public String getPassword() {
@@ -47,9 +47,12 @@ public class User {
         return nickName;
     }
 
-    public void updateWith(String nickName) {
+    public void updateWith(String loginId,String password,String nickName) {
 
+        this.loginId = loginId;
+        this.password = password;
         this.nickName = nickName;
+
 
     }
 
