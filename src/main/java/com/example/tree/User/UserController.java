@@ -1,8 +1,10 @@
 package com.example.tree.User;
 
+
 import com.example.tree.User.Dto.UserLoginRequest;
 import com.example.tree.User.Dto.UserLoginResponse;
 import com.example.tree.User.Dto.UserUpdate;
+
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ public class UserController {
     public final LoginUserResolver loginUserResolver;
 
     public UserController(UserService userService, LoginUserResolver loginUserResolver) {
+
         this.userService = userService;
         this.loginUserResolver = loginUserResolver;
     }
@@ -56,4 +59,5 @@ public class UserController {
         userService.delete(user);
     }
 }
+
 
