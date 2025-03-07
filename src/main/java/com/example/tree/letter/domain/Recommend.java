@@ -28,6 +28,14 @@ public class Recommend {
         return id;
     }
 
+    public Letter getLetter() {
+        return letter;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
     public Recommend(Letter letter, User user) {
         this.letter = letter;
         this.user = user;
