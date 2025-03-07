@@ -16,8 +16,8 @@ public class TreeController {
     }
 
     @GetMapping("/trees/{treeId}")
-    public TreeResponse read(@PathVariable Long treeId){
-        return treeService.read(treeId);
+    public TreeResponse read(@PathVariable Long treeId, @RequestParam String order){
+        return treeService.read(treeId, order);
     }
 
     @DeleteMapping("/trees/{treeId}")
