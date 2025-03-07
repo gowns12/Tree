@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public class Tree extends BaseTimeEntity {
     private User user;
 
     @OneToMany(mappedBy = "tree")
-    private List<Letter> letterList;
+    private List<Letter> letterList = new ArrayList<>();
 
     private boolean isOpen;
 

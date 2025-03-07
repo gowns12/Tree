@@ -3,7 +3,6 @@
 //import com.example.tree.AcceptanceTest;
 //import com.example.tree.User.UserRequest;
 //import com.example.tree.letter.dto.LetterRequest;
-//import com.example.tree.letter.dto.LetterResponse;
 //import com.example.tree.tree.createTreeRequest;
 //import io.restassured.RestAssured;
 //import io.restassured.http.ContentType;
@@ -18,7 +17,7 @@
 //        RestAssured
 //                .given()
 //                .contentType(ContentType.JSON)
-//                .body(new createTreeRequest("test",1L))
+//                .body(new createTreeRequest("test"))
 //                .when().post("/trees")
 //                .then();
 //
@@ -28,6 +27,13 @@
 //                .body(new UserRequest("testid","testpw","testnick"))
 //                .when().post("/users/signup")
 //                .then();
+//
+//        RestAssured
+//                .given()
+//                .contentType(ContentType.JSON)
+//                .body(new UserRequest("testID","testPW","testNick"))
+//                .when().post("/users/signup")
+//                .
 //
 //    }
 //
