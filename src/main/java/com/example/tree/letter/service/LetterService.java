@@ -95,9 +95,12 @@ public class LetterService {
             letter.removeRecommend(recommend);
             recommendDao.deleteById(letterId,userId);
         }
-        Recommend recommend = new Recommend(letter, user);
-        letter.addRecommend(recommend);
-        recommendRepository.save(recommend);
+        else {
+            Recommend recommend = new Recommend(letter, user);
+            letter.addRecommend(recommend);
+            recommendRepository.save(recommend);
+        }
+
     }
 
     //삭제된 편지 복구
