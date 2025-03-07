@@ -1,6 +1,7 @@
 package com.example.tree.api;
 
 import com.example.tree.AcceptanceTest;
+import com.example.tree.User.UserRequest;
 import com.example.tree.letter.dto.LetterRequest;
 import com.example.tree.letter.dto.LetterResponse;
 import com.example.tree.tree.createTreeRequest;
@@ -24,7 +25,7 @@ public class LetterApiTest extends AcceptanceTest {
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)
-                .body(new createTreeRequest("test",1L))
+                .body(new UserRequest("testid","testpw","testnick"))
                 .when().post("/users/signup")
                 .then();
 
