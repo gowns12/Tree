@@ -13,15 +13,12 @@ import javax.management.Query;
 @Repository
 public class TreeDao {
     private final JPAQueryFactory queryFactory;
-    private final QTree qTree;
-    private final QLetter qLetter;
-    private final QUser qUser;
+    private final QTree qTree = QTree.tree;
+    private final QLetter qLetter = QLetter.letter;
+    private final QUser qUser = QUser.user;
 
-    public TreeDao(JPAQueryFactory queryFactory, QTree qTree, QLetter qLetter, QUser qUser) {
+    public TreeDao(JPAQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
-        this.qTree = qTree;
-        this.qLetter = qLetter;
-        this.qUser = qUser;
     }
 
     public Tree findByTreeIdAndIsOpen(Long treeId){
