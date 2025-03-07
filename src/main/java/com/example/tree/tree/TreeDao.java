@@ -4,7 +4,6 @@ import com.example.tree.User.QUser;
 import com.example.tree.letter.domain.QLetter;
 import com.example.tree.tree.exception.TreeIsNotOpenException;
 import com.example.tree.tree.exception.TreeNotFoundException;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 
@@ -14,9 +13,6 @@ import javax.management.Query;
 public class TreeDao {
     private final JPAQueryFactory queryFactory;
     private final QTree qTree = QTree.tree;
-    private final QLetter qLetter = QLetter.letter;
-    private final QUser qUser = QUser.user;
-
     public TreeDao(JPAQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
