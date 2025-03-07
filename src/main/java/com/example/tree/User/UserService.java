@@ -1,6 +1,10 @@
 package com.example.tree.User;
 
+import com.example.tree.User.Dto.JwtProvider;
+import com.example.tree.User.Dto.UserLoginRequest;
 import com.example.tree.User.Dto.UserLoginResponse;
+import com.example.tree.User.Dto.UserUpdate;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.apache.catalina.security.SecurityUtil;
 import org.springframework.stereotype.Service;
@@ -8,22 +12,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
     public final UserRepository userRepository;
+    public final JwtProvider jwtProvider;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, JwtProvider jwtProvider) {
         this.userRepository = userRepository;
+        this.jwtProvider = jwtProvider;
     }
     //회원가입
-    public void save(@Valid UserRequest request) {
+    public void save(UserRequest request) {
         String password = SecurityUtils.sha256EncryptHex2(request.password());
         userRepository.save(new User(
                 request.loginId(),
                 password,
-                request.nickname()
+                request.nickName()
         ));
 
     }
     //로그인
-    public UserLoginResponse login(@Valid UserRequest request) {
+    public UserLoginResponse login(UserLoginRequest request) {
         String encryptedPassword = SecurityUtils.sha256EncryptHex2(request.password()); // 암호화된 패스워드
 
         // loginId로 사용자 찾기
@@ -41,11 +47,19 @@ public class UserService {
 
 
         // 로그인 성공, 유저 정보를 담은 응답 객체 반환
-        return new UserLoginResponse(user.getUserId());
+        return new UserLoginResponse(user.getUserId(),jwtProvider.createToken(request.loginId()));
     }
 
     //수정
-    public UserLoginResponse update(@Valid UserRequest request) {
-        return null;
+    @Transactional
+    public void update(User user, UserUpdate request) {
+        user.updateWith(
+                request.nickName()
+        );
+    }
+    //삭제
+    @Transactional
+    public void delete(User user) {
+        userRepository.delete(user);
     }
 }
