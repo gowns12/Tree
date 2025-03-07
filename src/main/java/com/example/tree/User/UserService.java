@@ -55,9 +55,10 @@ public class UserService {
     //수정
     @Transactional
     public void update(User user, UserUpdate request) {
+        String encryptedPassword = SecurityUtils.sha256EncryptHex2(request.password());
         user.updateWith(
                 request.loginId(),
-                request.password(),
+                encryptedPassword,
                 request.nickName()
         );
     }
