@@ -68,6 +68,6 @@ public class Tree extends BaseTimeEntity {
     }
 
     public void isClose(){
-        this.isOpen=false;
+        this.isOpen=!isOpen;
     }
 }

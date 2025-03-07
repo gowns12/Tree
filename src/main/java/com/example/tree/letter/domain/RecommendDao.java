@@ -27,4 +27,10 @@ public class RecommendDao {
                 .where(qRecommend.id.letterId.eq(letter.getId()).and(qRecommend.id.userId.eq(user.getId())))
                 .fetchOne();
     }
+
+    public void deleteById(Long letterId, Long userId) {
+        queryFactory.delete(qRecommend)
+                .where(qRecommend.id.letterId.eq(letterId).and(qRecommend.id.userId.eq(userId)))
+                .execute();
+    }
 }

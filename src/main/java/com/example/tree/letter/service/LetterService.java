@@ -93,6 +93,7 @@ public class LetterService {
         if (recommendDao.existsRecommend(letter, user)) {
             Recommend recommend = recommendDao.findByLetterAndUser(letter, user);
             letter.removeRecommend(recommend);
+            recommendDao.deleteById(letterId,userId);
         }
         Recommend recommend = new Recommend(letter, user);
         letter.addRecommend(recommend);
@@ -101,6 +102,7 @@ public class LetterService {
 
     //삭제된 편지 복구
     //관리자나 작성자만 복구 가능
+    @Transactional
     public void recoveryLetter(Long letterId, Long userId) {
         Letter letter = FindEntity.findByLetterId(letterId, letterRepository);
         User user = FindEntity.findByUserId(userId, userRepository);

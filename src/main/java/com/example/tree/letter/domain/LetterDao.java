@@ -2,11 +2,18 @@ package com.example.tree.letter.domain;
 
 import com.example.tree.User.QUser;
 import com.example.tree.User.User;
+import com.example.tree.letter.dto.QueryLetterDto;
 import com.example.tree.letter.exception.AccessDeniedException;
 import com.example.tree.tree.QTree;
 import com.example.tree.tree.Tree;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.ComparableExpressionBase;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class LetterDao {
@@ -50,5 +57,35 @@ public class LetterDao {
         }
         //편지가 공개상태가 아니라면 조회불가
         throw new AccessDeniedException("트리주인과 작성자만 볼 수 있는 편지입니다.");
+    }
+
+    public List<QueryLetterDto> findAllByTreeIdOrderBy(Long treeId, String order) {
+        OrderSpecifier<?> orderSpecifier = createOrderSpecifier(order);
+
+        List<QueryLetterDto> letterDtos = queryFactory
+                .select(
+                        Projections.constructor(
+                                QueryLetterDto.class,
+                                qLetter.id,
+                                qLetter.nickname
+                        )
+                )
+                .from(qLetter)
+                .where(qLetter.tree.id.eq(treeId).and(qLetter.isInvisible.isTrue()).and(qLetter.isDeleted.isFalse()))
+                .orderBy(orderSpecifier)
+                .fetch();
+
+        return letterDtos;
+    }
+    private OrderSpecifier<?> createOrderSpecifier(String order){
+        ComparableExpressionBase<?> targetField;
+        if ("recommend".equals(order)) {
+            targetField = qLetter.recommends.size();
+            return new OrderSpecifier<>(Order.DESC,targetField);
+        }
+        else {
+            targetField = qLetter.createdTime;
+            return new OrderSpecifier<>(Order.ASC, targetField);
+        }
     }
 }
