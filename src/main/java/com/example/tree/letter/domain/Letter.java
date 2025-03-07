@@ -54,7 +54,7 @@ public class Letter extends BaseTimeEntity {
         this.tree = tree;
         tree.getLetterList().add(this);
         this.user = user;
-//        user.getLetters().add(this);
+        user.getLetters().add(this);
     }
 
     public Long getId() {

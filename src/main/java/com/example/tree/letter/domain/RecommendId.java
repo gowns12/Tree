@@ -25,6 +25,11 @@ public class RecommendId implements Serializable {
     public RecommendId() {
     }
 
+    public RecommendId(Long userId, Long letterId) {
+        this.userId = userId;
+        this.letterId = letterId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

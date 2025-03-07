@@ -18,13 +18,11 @@ import java.util.List;
 @Repository
 public class LetterDao {
     private final JPAQueryFactory queryFactory;
-    private final QLetter qLetter;
-    private final QUser qUser;
+    private final QLetter qLetter = QLetter.letter;
+    private final QUser qUser = QUser.user;
 
-    public LetterDao(JPAQueryFactory queryFactory, QLetter qLetter, QTree qTree, QUser qUser) {
+    public LetterDao(JPAQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
-        this.qLetter = qLetter;
-        this.qUser = qUser;
     }
 
     //편지ID와 사용자ID를 이용해 편지를 조회,
@@ -73,7 +71,7 @@ public class LetterDao {
                         )
                 )
                 .from(qLetter)
-                .where(qLetter.tree.id.eq(treeId))
+                .where(qLetter.tree.id.eq(treeId).and(qLetter.isInvisible.isTrue()).and(qLetter.isDeleted.isFalse()))
                 .orderBy(orderSpecifier)
                 .fetch();
 

@@ -37,6 +37,7 @@ public class Recommend {
     }
 
     public Recommend(Letter letter, User user) {
+        id = new RecommendId(letter.getId(), user.getId());
         this.letter = letter;
         this.user = user;
     }
