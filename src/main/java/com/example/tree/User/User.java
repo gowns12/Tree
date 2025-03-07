@@ -19,7 +19,7 @@ public class User {
     private String password;
 
     @NotBlank(message = "닉네임을 입력해주세요.")
-    private String nickname;
+    private String nickName;
 
     public User() {
     }
@@ -28,7 +28,7 @@ public class User {
 
         this.userId = userId;
         this.password = password;
-        this.nickname = nickname;
+        this.nickName = nickname;
     }
 
     public Long getId() {
@@ -44,7 +44,13 @@ public class User {
     }
 
     public String getNickname() {
-        return nickname;
+        return nickName;
+    }
+
+    public void updateWith(String nickName) {
+
+        this.nickName = nickName;
+
     }
 
 }
